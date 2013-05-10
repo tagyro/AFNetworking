@@ -100,14 +100,17 @@ static char kAFImageRequestOperationObjectKey;
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
     [self cancelImageRequestOperation];
-    
+//    NSLog(@"entered here");
     UIImage *cachedImage = [[[self class] af_sharedImageCache] cachedImageForRequest:urlRequest];
     if (cachedImage) {
         self.image = cachedImage;
         self.af_imageRequestOperation = nil;
         
         if (success) {
-            success(nil, nil, cachedImage);
+//            NSLog(@"returning cached image");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success(nil, nil, cachedImage);
+            });
         }
     } else {
         self.image = placeholderImage;
@@ -120,7 +123,10 @@ static char kAFImageRequestOperationObjectKey;
             }
 
             if (success) {
-                success(operation.request, operation.response, responseObject);
+//                NSLog(@"returning loaded image");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(operation.request, operation.response, responseObject);
+                });
             }
 
             [[[self class] af_sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
