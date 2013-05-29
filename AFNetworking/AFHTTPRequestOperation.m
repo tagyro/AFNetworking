@@ -274,7 +274,7 @@ static void AFSwizzleClassMethodWithClassAndSelectorUsingBlock(Class klass, SEL 
         jsonData = [NSJSONSerialization dataWithJSONObject:res options:0 error:&error];
         //
         if (error) {
-            NSLog(@"Got an error: %@", error);
+//            NSLog(@"Got an error: %@", error);
         } else {
             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
             FLogIn(jsonString);
