@@ -118,7 +118,9 @@ static char kAFImageRequestOperationObjectKey;
         AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[urlRequest URL] isEqual:[[self.af_imageRequestOperation request] URL]]) {
-                self.image = responseObject;
+                if (responseObject) {
+                    self.image = responseObject;
+                }
                 self.af_imageRequestOperation = nil;
             }
 
