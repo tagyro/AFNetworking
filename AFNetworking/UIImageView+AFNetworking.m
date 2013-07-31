@@ -119,7 +119,15 @@ static char kAFImageRequestOperationObjectKey;
                 if (success) {
                     success(operation.request, operation.response, responseObject);
                 } else if (responseObject) {
-                    self.image = responseObject;
+                    @try {
+                        self.image = responseObject;
+                    }
+                    @catch (NSException *exception) {
+                        self.image = nil;
+                    }
+                    @finally {
+                        //
+                    }
                 }
 
                 if (self.af_imageRequestOperation == operation) {
