@@ -162,7 +162,12 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 
 static NSString * AFJSONStringFromParameters(NSDictionary *parameters) {
     NSError *error = nil;
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];;
+    NSData *JSONData;
+    if (parameters) {
+        JSONData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&error];;
+    } else {
+        return nil;
+    }
     
     if (!error) {
         return [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
