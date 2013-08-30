@@ -116,7 +116,7 @@ static char kAFImageRequestOperationObjectKey;
         AFImageRequestOperation *requestOperation = [[AFImageRequestOperation alloc] initWithRequest:urlRequest];
 		
 #ifdef _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
-		requestOperation.allowsInvalidSSLCertificate = YES;
+//		requestOperation.allowsInvalidSSLCertificate = YES;
 #endif
 		
         [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
